@@ -1,0 +1,36 @@
+:root{
+    --abbey:#494F55; /* shades of black */
+    --audience:#e8eae6; /* shades of white */
+    --transparent:transparent;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background-color:var(--abbey);
+    height:100vh;
+}
+
+div.left-white{
+    border:hidden;
+    height:100vh;
+    background-color:var(--audience);
+    padding:4px;
+}
+div.right-black{
+    border:hidden;
+    height:100vh;
+    padding:20px;
+}
+
+/* card styling */
+.card-header{
+    position:relative;
+    height:62px;
+    background:none;
+}
+.wavy{
+    position:absolute;
+    top:0;
+    left:0;
+}
