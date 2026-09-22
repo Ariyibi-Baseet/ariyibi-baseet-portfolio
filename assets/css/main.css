@@ -725,7 +725,7 @@ section,
 .hero .hero-visual .profile-container {
   position: relative;
   width: 400px;
-  height: 400px;
+  height: 500px;
 }
 
 .hero .hero-visual .profile-container .profile-background {
@@ -734,7 +734,7 @@ section,
   left: 15px;
   width: 100%;
   height: 100%;
-  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+  /* background: color-mix(in srgb, var(--accent-color), transparent 90%); */
   border-radius: 30px;
   z-index: 1;
 }
@@ -1287,99 +1287,139 @@ section,
   background-color: var(--accent-color);
 }
 
-.skills .skill-item {
-  margin-bottom: 25px;
+.skills .skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
-.skills .skill-item:last-child {
-  margin-bottom: 0;
+.skills .skill-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+  background-color: color-mix(
+    in srgb,
+    var(--surface-color),
+    var(--background-color) 40%
+  );
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 88%);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.35s ease;
 }
 
-.skills .skill-item h4 {
+.skills .skill-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--accent-color), transparent 92%),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.skills .skill-card:hover {
+  transform: translateX(6px);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 40%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.skills .skill-card:hover::before {
+  opacity: 1;
+}
+
+.skills .skill-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
+  transition: all 0.35s ease;
+}
+
+.skills .skill-icon i {
+  font-size: 24px;
+  color: var(--accent-color);
+  transition: transform 0.35s ease;
+}
+
+.skills .skill-card:hover .skill-icon {
+  background-color: var(--accent-color);
+}
+
+.skills .skill-card:hover .skill-icon i {
+  color: var(--contrast-color, var(--background-color));
+  transform: scale(1.1) rotate(-6deg);
+}
+
+.skills .skill-body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.skills .skill-body h4 {
   font-size: 16px;
   margin-bottom: 8px;
+  color: var(--heading-color);
 }
 
-.skills .skill-item .skill-percentage {
-  font-size: 14px;
-  color: color-mix(in srgb, var(--heading-color), transparent 30%);
+.skills .skill-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
 }
 
-.skills .skill-item .progress {
-  height: 8px;
-  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
+.skills .skill-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+  transition: all 0.3s ease;
 }
 
-.skills .skill-item .progress .progress-bar {
+.skills .skill-card[data-level="5"] .skill-dots span:nth-child(-n + 5),
+.skills .skill-card[data-level="4"] .skill-dots span:nth-child(-n + 4),
+.skills .skill-card[data-level="3"] .skill-dots span:nth-child(-n + 3),
+.skills .skill-card[data-level="2"] .skill-dots span:nth-child(-n + 2),
+.skills .skill-card[data-level="1"] .skill-dots span:nth-child(-n + 1) {
   background-color: var(--accent-color);
-  transition: width 1.5s ease-in-out;
-  width: 0;
-  height: 100%;
-  border-radius: 20px;
 }
 
-.skills .skill-item .skill-tooltip {
-  font-size: 14px;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  margin-top: 8px;
+.skills .skill-card:hover .skill-dots span {
+  transform: scale(1.15);
+}
+
+.skills .skill-level-label {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  font-family: var(--nav-font);
+  font-weight: 600;
+}
+
+.skills .skill-tooltip {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: -40px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
   opacity: 0;
-  transform: translateY(-5px);
-  transition: all 0.3s;
-}
-
-.skills .skill-item:hover .skill-tooltip {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.skills .skill-box {
-  background-color: var(--surface-color);
-  padding: 25px 20px;
-  border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-}
-
-.skills .skill-box:hover {
-  transform: translateY(-5px);
-}
-
-.skills .skill-box:hover i {
-  color: var(--accent-color);
-  transform: scale(1.1);
-}
-
-.skills .skill-box:hover .skill-tooltip {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.skills .skill-box i {
-  font-size: 36px;
-  color: color-mix(in srgb, var(--accent-color), transparent 20%);
-  margin-bottom: 15px;
-  display: inline-block;
-  transition: all 0.3s;
-}
-
-.skills .skill-box h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.skills .skill-box .skill-tooltip {
-  font-size: 14px;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  opacity: 0;
-  transform: translateY(5px);
-  transition: all 0.3s;
+  transform: translateY(-6px);
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 @media (max-width: 991.98px) {
@@ -1388,16 +1428,6 @@ section,
   }
 
   .skills .skills-category:last-child {
-    margin-bottom: 0;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .skills .skill-box {
-    margin-bottom: 20px;
-  }
-
-  .skills .skill-box:last-child {
     margin-bottom: 0;
   }
 }
@@ -1545,175 +1575,168 @@ section,
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
-@media (max-width: 991px) {
-  .portfolio .filter-sidebar {
-    margin-bottom: 30px;
-  }
-}
-
-.portfolio .filters-wrapper {
-  background-color: color-mix(
-    in srgb,
-    var(--surface-color),
-    var(--default-color) 3%
-  );
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
-}
-
-@media (max-width: 991px) {
-  .portfolio .filters-wrapper {
-    padding: 20px;
-  }
-}
-
-.portfolio .portfolio-filters {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-@media (max-width: 991px) {
-  .portfolio .portfolio-filters {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-.portfolio .portfolio-filters li {
-  cursor: pointer;
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--default-color);
-  transition: all 0.3s ease-in-out;
-  border-radius: 6px;
-  background: transparent;
-  position: relative;
-  border-left: 3px solid transparent;
-}
-
-@media (max-width: 991px) {
-  .portfolio .portfolio-filters li {
-    padding: 8px 16px;
-    border: 1px solid color-mix(in srgb, var(--accent-color), transparent 80%);
-    border-left-width: 3px;
-  }
-}
-
-.portfolio .portfolio-filters li:hover {
-  color: var(--accent-color);
-  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
-  border-left-color: color-mix(in srgb, var(--accent-color), transparent 50%);
-}
-
-.portfolio .portfolio-filters li.filter-active {
-  color: var(--accent-color);
-  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
-  border-left-color: var(--accent-color);
-  font-weight: 600;
+.portfolio .section-title p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
 .portfolio .portfolio-wrap {
-  transition: 0.4s;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  height: 100%;
-}
-
-.portfolio .portfolio-wrap img {
-  transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-}
-
-.portfolio .portfolio-wrap .portfolio-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 25px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.4) 60%,
-    rgba(0, 0, 0, 0) 100%
+  background-color: color-mix(
+    in srgb,
+    var(--surface-color),
+    var(--background-color) 40%
   );
-  z-index: 3;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transform: translateY(20px);
-  opacity: 0;
-}
-
-.portfolio .portfolio-wrap .portfolio-info .content {
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transform: translateY(20px);
-}
-
-.portfolio .portfolio-wrap .portfolio-info .category {
-  display: inline-block;
-  color: var(--accent-color);
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.portfolio .portfolio-wrap .portfolio-info h4 {
-  font-size: 20px;
-  color: var(--contrast-color);
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links {
-  display: flex;
-  gap: 12px;
-}
-
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links a {
-  color: var(--contrast-color);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: color-mix(in srgb, var(--accent-color), transparent 30%);
-  border-radius: 50%;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links a:hover {
-  background-color: var(--accent-color);
-  transform: translateY(-3px);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 88%);
+  border-radius: 14px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.35s ease;
 }
 
 .portfolio .portfolio-wrap:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 40%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-.portfolio .portfolio-wrap:hover img {
+.portfolio .portfolio-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio .portfolio-image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  display: block;
+}
+
+.portfolio .portfolio-wrap:hover .portfolio-image img {
   transform: scale(1.08);
 }
 
-.portfolio .portfolio-wrap:hover .portfolio-info {
+.portfolio .portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.portfolio .portfolio-wrap:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio .portfolio-links {
+  display: flex;
+  gap: 14px;
+}
+
+.portfolio .portfolio-links a {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+  color: var(--contrast-color, var(--background-color));
+  border-radius: 50%;
+  font-size: 18px;
+  transform: translateY(15px);
+  opacity: 0;
+  transition: all 0.35s ease;
+}
+
+.portfolio .portfolio-wrap:hover .portfolio-links a {
   transform: translateY(0);
   opacity: 1;
 }
 
-.portfolio .portfolio-wrap:hover .portfolio-info .content {
-  transform: translateY(0);
+.portfolio .portfolio-wrap:hover .portfolio-links a:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.portfolio .portfolio-links a:hover {
+  background-color: color-mix(in srgb, var(--accent-color), white 15%);
+  transform: translateY(-3px) scale(1.05);
+}
+
+.portfolio .portfolio-details {
+  padding: 24px;
+}
+
+.portfolio .portfolio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.portfolio .portfolio-tags span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: var(--nav-font);
+}
+
+.portfolio .portfolio-details h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--heading-color);
+}
+
+.portfolio .portfolio-details p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  margin-bottom: 18px;
+}
+
+.portfolio .portfolio-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-color);
+  transition: gap 0.3s ease;
+}
+
+.portfolio .portfolio-cta i {
+  transition: transform 0.3s ease;
+}
+
+.portfolio .portfolio-cta:hover {
+  gap: 12px;
+  color: var(--accent-color);
+}
+
+.portfolio .portfolio-cta:hover i {
+  transform: translateX(3px);
+}
+
+@media (max-width: 767.98px) {
+  .portfolio .portfolio-image img {
+    height: 220px;
+  }
+
+  .portfolio .portfolio-details {
+    padding: 20px;
+  }
 }
 
 /*--------------------------------------------------------------
